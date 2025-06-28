@@ -44,5 +44,12 @@ public class Main {
         grouped.forEach((grade, names) -> {
             System.out.println(grade + ": " + names);
         });
+
+        Map<String, Double> avgScores = StudentStreamService.averageScoreByGrade(students);
+        avgScores.forEach((grade, avg) -> System.out.println("Average for " + grade + ": " + avg));
+
+        Map<String, Student> topScorer = StudentStreamService.topScorerByGrade(students);
+        System.out.println("Top Scorer by Grade:");
+        topScorer.forEach((grade, student) -> System.out.println(grade + ": " + student.getName()));
     }
 }
