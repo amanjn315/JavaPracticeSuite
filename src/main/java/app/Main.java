@@ -1,6 +1,7 @@
 package main.java.app;
 
 import main.java.models.Student;
+import main.java.modules.functional.StudentFilterEngine;
 import main.java.modules.streams.StudentStreamService;
 
 import java.util.Arrays;
@@ -51,5 +52,8 @@ public class Main {
         Map<String, Student> topScorer = StudentStreamService.topScorerByGrade(students);
         System.out.println("Top Scorer by Grade:");
         topScorer.forEach((grade, student) -> System.out.println(grade + ": " + student.getName()));
+
+        List<Student> passed = StudentFilterEngine.filterStudents(students, s -> s.getScore() >= 60);
+        System.out.println("Passed Students: " + passed);
     }
 }
