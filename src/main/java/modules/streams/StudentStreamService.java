@@ -22,7 +22,7 @@ public class StudentStreamService {
                 ));
     }
 
-    private static String getGrade(int score){
+    public static String getGrade(int score){
         if(score >= 90) return "A";
         else if(score >= 75) return "B";
         else if(score >= 60) return "C";

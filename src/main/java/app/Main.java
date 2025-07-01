@@ -1,12 +1,19 @@
 package main.java.app;
 
 import main.java.models.Student;
+import main.java.modules.functional.StudentActionExecutor;
+import main.java.modules.functional.StudentFactory;
 import main.java.modules.functional.StudentFilterEngine;
+import main.java.modules.functional.StudentMapper;
 import main.java.modules.streams.StudentStreamService;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.function.Supplier;
+
+import static main.java.modules.streams.StudentStreamService.getGrade;
 
 /**
  * @author amanjain
@@ -55,5 +62,21 @@ public class Main {
 
         List<Student> passed = StudentFilterEngine.filterStudents(students, s -> s.getScore() >= 60);
         System.out.println("Passed Students: " + passed);
+
+        StudentActionExecutor.applyToAll(students,
+                s -> System.out.println("🎓 " + s.getName() + " scored " + s.getScore()));
+
+        List<String> summaries = StudentMapper.mapStudents(students,
+                s -> s.getName() + " | Score: " + s.getScore() + " | Grade: " + getGrade(s.getScore()));
+        summaries.forEach(System.out::println);
+
+        Supplier<Student> randomStudentSupplier = () -> {
+            String[] names = {"Aman", "Ravi", "Raj", "Simran", "Vikas"};
+            int score = new Random().nextInt(101);
+            String name = names[new Random().nextInt(names.length)];
+            return new Student(name, score);
+        };
+        List<Student> generated = StudentFactory.generateStudents(5, randomStudentSupplier);
+        generated.forEach(s -> System.out.println(s.getName() + " - " + s.getScore()));
     }
 }
