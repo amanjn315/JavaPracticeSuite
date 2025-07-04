@@ -1,4 +1,4 @@
-package main.java.modules.patterns.factorypattern;
+package main.java.modules.patterns.factory;
 
 /**
  * @author amanjain

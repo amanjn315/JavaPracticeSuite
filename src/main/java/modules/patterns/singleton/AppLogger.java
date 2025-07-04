@@ -1,4 +1,4 @@
-package main.java.modules.patterns;
+package main.java.modules.patterns.singleton;
 
 /**
  * @author amanjain
